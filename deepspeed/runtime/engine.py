@@ -766,6 +766,11 @@ class DeepSpeedEngine(Module):
     def mics_shard_size(self):
         return self._config.mics_shard_size
 
+    def virtual_pipeline_parallel_size(self):
+        assert self.zero_optimization_stage(
+        ) < ZeroStageEnum.gradients, "ZeRO-2 and ZeRO-3 are incompatible with pipeline parallelism"
+        return self._config_.virtual_pipeline_parallel_size
+
     def zero_reduce_bucket_size(self):
         return self._config.zero_config.reduce_bucket_size
 

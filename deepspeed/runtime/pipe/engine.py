@@ -96,6 +96,9 @@ class PipelineEngine(DeepSpeedEngine):
         # pipeline step for logging
         self.log_batch_step_id = -1
 
+        # virtual pipeline stages
+        virtual_stages = self.virtual_pipeline_parallel_size()
+
         self.micro_batch_size = self.train_micro_batch_size_per_gpu()
         self.micro_batches = self.gradient_accumulation_steps()
 

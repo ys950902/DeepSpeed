@@ -319,6 +319,11 @@ class DeepSpeedZeroConfig(DeepSpeedConfigModel):
     """
     Override nn.Module apply function, for Stage 3.
     """
+    
+    virtual_pipeline_parallel_size: int = Field(1, new_param="virtual_pipeline_parallel_size")
+    """
+    Number of layers per virtual pipeline stages, for interleave pipeline-parallelism
+    """
 
     # Validators
     @model_validator(mode="after")
