@@ -135,8 +135,11 @@ def get_accelerator():
                     accelerator_name = "xpu"
             except ImportError as e:
                 import torch
-                if torch.xpu.is_available():
-                    accelerator_name = "xpu"
+                if hasattr(torch, 'xpu'):
+                    if torch.xpu.is_available():
+                        accelerator_name = "xpu"
+                    else:
+                        pass
                 else:
                     pass
         if accelerator_name is None:
